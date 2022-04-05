@@ -3,13 +3,11 @@
 /* module master_device(addr,TX,RX,CLK);
 input RX;
 output TX,CLK;
-
 endmodule 
 */
-
 module slave_devices(TX,RX,CLK);
 input RX,CLK;
-output TX;
+output reg TX;
 
 reg[7:0]ADDR;
 reg[7:0]DATA;
@@ -21,6 +19,13 @@ begin
     if(counter<8)
     begin
         ADDR_COMPARE[counter]=RX;
+    end
+    else
+    begin
+        if(ADDR_COMPARE==ADDR)
+        begin
+            TX=DATA[counter-8];
+        end
     end
     counter=counter+1;
 end
