@@ -7,7 +7,7 @@ endmodule
 */
 module slave_devices(TX,RX,CLK);
 input RX,CLK;
-output reg TX=0;
+output reg TX;
 
 reg[7:0]ADDR; //Address Bits
 reg[7:0]DATA; //Data bits
