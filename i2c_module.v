@@ -1,8 +1,27 @@
 /* Inter Integrated Circuit Communication Protocol*/
 `timescale 1ns/1ns
-/* module master_device(addr,TX,RX,CLK);
+/* module master_device(ADDR,RX,TX,CLK);
+input[7:0] ADDR;
 input RX;
-output TX,CLK;
+output reg TX;
+output reg CLK;
+reg[7:0] DATA;
+integer i=0;
+always(@ADDR)
+begin 
+    for(i=0;i<8;i=i+1)
+    begin
+        CLK=0;#10;
+        TX=ADDR[i];
+        CLK=1;10;
+    end
+    for(i=0;i<8;i=i+1)
+    begin
+        CLK=0;#10;
+        CLK=1;#10;
+        DATA[i]=RX;
+    end
+end
 endmodule 
 */
 module slave_devices(TX,RX,CLK);
