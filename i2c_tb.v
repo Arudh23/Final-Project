@@ -30,41 +30,41 @@ initial begin
     UUT3.DATA=8'h6C;
 
     device_select=UUT0.ADDR;
-    for(i=0;i<8;i+=1)
+    for(i=0;i<8;i=i+1)
     begin
         RX=device_select[i]; #10;CLK=0;#10;CLK=1;#10;
     end
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         #10;CLK=0;#10;CLK=1;#10;
     end
 
     device_select=UUT1.ADDR;
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         RX=device_select[i]; #10;CLK=0;#10;CLK=1;#10;
     end
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         #10;CLK=0;#10;CLK=1;#10;
     end
 
     device_select=UUT2.ADDR;
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         RX=device_select[i]; #10;CLK=0;#10;CLK=1;#10;
     end
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         #10;CLK=0;#10;CLK=1;#10;
     end
 
     device_select=UUT3.ADDR;
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         RX=device_select[i]; #10;CLK=0;#10;CLK=1;#10;
     end
-    for( i=0;i<8;i+=1)
+    for( i=0;i<8;i=i+1)
     begin
         #10;CLK=0;#10;CLK=1;#10;
     end
