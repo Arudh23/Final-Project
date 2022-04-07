@@ -1,39 +1,39 @@
 /* Inter Integrated Circuit Communication Protocol*/
 `timescale 1ns/1ns
-/* module master_device(ADDR,RX,TX,CLK);
+module master_device(ADDR,RX,TX,SCLK);
 input[7:0] ADDR;
 input RX;
 output reg TX;
-output reg CLK;
+output reg SCLK;
 reg[7:0] DATA;
 integer i=0;
-always(@ADDR)
+always@(ADDR)
 begin 
     for(i=0;i<8;i=i+1)
     begin
-        CLK=0;#10;
+        SCLK=0;#10;
         TX=ADDR[i];
-        CLK=1;10;
+        SCLK=1;#10;
     end
     for(i=0;i<8;i=i+1)
     begin
-        CLK=0;#10;
-        CLK=1;#10;
+        SCLK=0;#10;
+        SCLK=1;#10;
         DATA[i]=RX;
     end
 end
 endmodule 
-*/
-module slave_devices(TX,RX,CLK);
-input RX,CLK;
-output reg TX;//TX=0
+
+module slave_devices(TX,RX,SCLK);
+input RX,SCLK;
+output reg TX=0;
 
 reg[7:0]ADDR; //Address Bits
 reg[7:0]DATA; //Data bits
 reg[7:0]ADDR_COMPARE=8'd0;// Register to compare slave address with user address
 reg[3:0] counter=0; // To keep track of Clock Pulses
 
-always@(posedge CLK)
+always@(posedge SCLK)
 begin
     if(counter<8)
     begin

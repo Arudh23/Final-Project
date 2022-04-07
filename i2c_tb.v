@@ -2,10 +2,45 @@
 `include "i2c_module.v"
 
 module i2c_tb;
-reg RX=0;
-reg CLK=0;
+// reg RX=0;
+// reg CLK=0;
+reg[7:0]ADDR;
+wire MOSI;
+wire MISO;
+wire SCLK;
+wire [3:0]W_MISO;
+assign MISO=|W_MISO;
+master_device UUTM0(.ADDR(ADDR),.TX(MOSI),.RX(MISO),.SCLK(SCLK));
+slave_devices UUTS0(.TX(W_MISO[0]),.RX(MOSI),.SCLK(SCLK));
+slave_devices UUTS1(.TX(W_MISO[1]),.RX(MOSI),.SCLK(SCLK));
+slave_devices UUTS2(.TX(W_MISO[2]),.RX(MOSI),.SCLK(SCLK));
+slave_devices UUTS3(.TX(W_MISO[3]),.RX(MOSI),.SCLK(SCLK));
 
-wire TX0, TX1, TX2, TX3;
+    initial begin
+        $dumpfile("i2c.vcd");
+        $dumpvars(0,i2c_tb);
+
+        UUTS0.ADDR=8'h1A;
+        UUTS0.DATA=8'h5D;
+
+        UUTS1.ADDR=8'h1B;
+        UUTS1.DATA=8'h3F;
+
+        UUTS2.ADDR=8'h2A;
+        UUTS2.DATA=8'h41;
+
+        UUTS3.ADDR=8'h2B;
+        UUTS3.DATA=8'h6C;
+
+        ADDR=UUTS0.ADDR;#500;
+        ADDR=UUTS1.ADDR;#500;
+        ADDR=UUTS2.ADDR;#500;
+        ADDR=UUTS3.ADDR;#500;
+
+    end
+endmodulel
+
+/* wire TX0, TX1, TX2, TX3;
 
 slave_devices UUT0(.TX(TX0), .RX(RX), .CLK(CLK));
 slave_devices UUT1(.TX(TX1), .RX(RX), .CLK(CLK));
@@ -69,5 +104,4 @@ initial begin
         #10;CLK=0;#10;CLK=1;#10;
     end
  
-end
-endmodule
+end */
