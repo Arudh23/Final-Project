@@ -1,6 +1,5 @@
-/* Inter Integrated Circuit Communication Protocol*/
-`timescale 1ns/1ns 
-module master_device(ADDR,RX,TX,SCLK);
+`timescale 1ns/1ns
+module master_device(ADDR,IN_DATA,TX,SCLK);
 input[7:0] ADDR;
 input IN_DATA;
 output reg TX;
